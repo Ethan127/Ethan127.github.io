@@ -7,21 +7,21 @@
 
     <script>
         var canvas = document.getElementById("myCanvas");
-        canvas.width  = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.width  = window.innerWidth-20;
+        canvas.height = window.innerHeight-20;
         var ctx = canvas.getContext("2d");
         var ballRadius = 10;
         var x = canvas.width/2;
         var y = canvas.height-30;
         var dx = 2;
         var dy = -2;
-        var paddleHeight = 20;
+        var paddleHeight = 12;
         var paddleWidth = 100;
         var paddleX = (canvas.width-paddleWidth)/2;
         var rightPressed = false;
         var leftPressed = false;
-        var brickRowCount = 5;
-        var brickColumnCount = 3;
+        var brickRowCount = Math.floor(canvas.width/85);
+        var brickColumnCount = Math.floor((canvas.height*0.4)/50);
         var brickWidth = 75;
         var brickHeight = 20;
         var brickPadding = 10;
@@ -94,7 +94,7 @@
         }
         function drawPaddle() {
             ctx.beginPath();
-            ctx.rect(paddleX, canvas.height-paddleHeight+20, paddleWidth, paddleHeight);
+            ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
             ctx.fillStyle = "#0095DD";
             ctx.fill();
         ctx.closePath();
