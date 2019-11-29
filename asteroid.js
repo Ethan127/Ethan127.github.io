@@ -203,10 +203,10 @@ function draw() {
   var s5 = "Your high score is " + round(Record());
   textSize(15);
   fill(255,255,0);
-  text(s1, 25-width/2, 25-width/2); 
-  text(s2, 350-width/2, 25-width/2); 
-  text(s3, 700-width/2, 25-width/2); 
-  text(s4, 300-width/2, 55-width/2);
+  text(s1, 25-width/2, 25-height/2); 
+  text(s2, 350-width/2, 25-height/2); 
+  text(s3, 700-width/2, 25-height/2); 
+  text(s4, 300-width/2, 55-height/2);
   fill(66, 200, 244);
   rectMode(CENTER);
   text(s5, 0, height/2, 180, 50);
