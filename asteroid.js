@@ -1,4 +1,4 @@
-var moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record;
+var moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, AmoV, seconds, timeElapsed, startTime, TOD, record;
 var backgroundI, rocket, ast1, ast2, ast3, rocketImage, rocketImage2, myFont;
 var keyW, keyA, keyS, keyD, alive;
 var numAst, timesDied, numAmo, amoNum, Score, numAstShot;
@@ -97,6 +97,7 @@ function setup() {
   mass = 10;
   rectSL = 30;
   numAst = 15;
+  AmoV = 12;
   numAmo = 10; //Highest number of bullets on screen at once
 
   //Plays music
@@ -127,7 +128,7 @@ function mouseClicked(){
   if(alive==true){
     gun.play();
     amoNum++;
-    bullets[amoNum] = new Amo(5, 5, angle, random(255), random(255), random(255), centerX, centerY);
+    bullets[amoNum] = new Amo(5, AmoV, angle, random(255), random(255), random(255), centerX, centerY);
     if (amoNum == numAmo-1){
       amoNum = 0;
     }
