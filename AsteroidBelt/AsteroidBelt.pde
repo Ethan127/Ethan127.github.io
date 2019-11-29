@@ -1,6 +1,6 @@
 /* @pjs preload="AsteroidBelt/Images/Background.png,AsteroidBelt/Images/a1.png,AsteroidBelt/Images/a2.png,AsteroidBelt/Images/a3.png"; */
 
-float moveX, centerX, X, velX, angle, aimR, mass, rectSL, theAngle, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record, Record;
+float moveX, centerX, X, velX, angle, aimR, mass, rectSL, theA, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record, Record;
 PImage backgroundI, rocket, ast1, ast2, ast3;
 boolean keyW, keyA, keyS, keyD, alive;
 String rocketImage, rocketImage2;
@@ -10,7 +10,7 @@ Amo[] bullets;
 float[] scores;
 
 //Determines angle based on vector (x and y values) using inverse tangent
-float theAngle(float x, float y){
+float theA(float x, float y){
   float tAngle = 0;
   if (x>0 && y>0){
     tAngle = atan(abs(y)/abs(x));
@@ -137,7 +137,7 @@ void draw() {
   //Determines angle of rotation of spaceship (using inverse tangent)
   //If statements figure out what quadrant the mouse is in relative to the center
   //Function located below
-  angle = theAngle(mouseX-centerX, mouseY-centerY);
+  angle = theA(mouseX-centerX, mouseY-centerY);
   
   //Translates space ship around unless its on an edge
   moveX = moveX + velX/mass;
@@ -194,8 +194,8 @@ void draw() {
   int minute = floor(seconds / 60);
   int second = floor(seconds % 60);
   float velocity = sqrt(velX*velX+velY*velY);
-  float rAngle = 360 - theAngle(mouseX-centerX, mouseY-centerY)*180/PI;
-  float vAngle = 360 - theAngle(velX, velY)*180/PI;
+  float rAngle = 360 - theA(mouseX-centerX, mouseY-centerY)*180/PI;
+  float vAngle = 360 - theA(velX, velY)*180/PI;
   
   String s1 = "Velocity: " + velocity + "m/s";
   String s2 = "Angle of velocity: " + vAngle + "\u00b0";
