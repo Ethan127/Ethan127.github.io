@@ -113,13 +113,10 @@ function mouseClicked(){
 
 function draw() {
   //Background
-  beginShape();
+  rectMode(CENTER);
   texture(backgroundI);
-  vertex(-width/2,height/2);
-  vertex(width/2,height/2);
-  vertex(width/2,-height/2);
-  vertex(-width/2,-height/2);
-  endShape();
+  rect(0, 0, width, height)
+  rectMode(CORNER);
 
   //Checks time passed
   timeElapsed = millis() - startTime - TOD;
