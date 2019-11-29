@@ -144,7 +144,7 @@ function draw() {
   centerX = X+moveX;
   centerY = Y+moveY;
   //Loops position back around
-  if (centerX <= 0 || centerY <= 0 || centerX >= width || centerY >= height){
+  if (centerX <= -width/2 || centerY <= -height/2 || centerX >= width/2 || centerY >= height/2){
     moveX = 0;
     moveY = 0;
     Y = height - centerY;
@@ -317,24 +317,24 @@ class Asteroid {
     this.astR = this.astR + this.astRot;
     this.movement += this.velA;
     //Resets position if it goes to an edge
-    if (this.xpos <= 0 || this.xpos >= width || this.ypos <= 0 || this.ypos >= height){
+    if (this.xpos <= -width/2 || this.xpos >= width/2 || this.ypos <= -height/2 || this.ypos >= height/2){
       this.movement = 0;
       this.ran = floor(random(1,5));
       if(this.ran==1){
-        this.startx = random(1,width-1);
-        this.starty = 1;
+        this.startx = random(1-width,width-1);
+        this.starty = 1-height;
       }
       if(this.ran==2){
-        this.startx = random(1,width-1);
+        this.startx = random(1-width,width-1);
         this.starty = height-1;
       }
       if(this.ran==3){
-        this.startx = 1;
-        this.starty = random(1,height-1);
+        this.startx = 1-height;
+        this.starty = random(1-height,height-1);
       }
       if(this.ran==4){
         this.startx = width-1;
-        this.starty = random(1,height-1);
+        this.starty = random(1-height,height-1);
       }
     }
     //If the rocket collides with an asteroid, you die
@@ -417,20 +417,20 @@ class Amo {
         rocks[i].movement = 0;
         var ran = floor(random(1,5));
         if(ran==1){
-          rocks[i].startx = random(1,width-1);
-          rocks[i].starty = 1;
+          rocks[i].startx = random(1-width,width-1);
+          rocks[i].starty = 1-height;
         }
         if(ran==2){
-          rocks[i].startx = random(1,width-1);
+          rocks[i].startx = random(1-width,width-1);
           rocks[i].starty = height-1;
         }
         if(ran==3){
-          rocks[i].startx = 1;
-          rocks[i].starty = random(1,height-1);
+          rocks[i].startx = 1-width;
+          rocks[i].starty = random(1-height,height-1);
         }
         if(ran==4){
           rocks[i].startx = width-1;
-          rocks[i].starty = random(1,height-1);
+          rocks[i].starty = random(1-height,height-1);
         }
         //Essentially deletes amo when it hits an asteroid
         this.size = 0;
