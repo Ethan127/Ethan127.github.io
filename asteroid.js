@@ -125,7 +125,7 @@ function mouseClicked(){
   }
   //Shoots
   if(alive==true){
-    rocketSound.play();
+    gun.play();
     amoNum++;
     bullets[amoNum] = new Amo(5, 5, angle, random(255), random(255), random(255), centerX, centerY);
     if (amoNum == numAmo-1){
