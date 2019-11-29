@@ -209,7 +209,7 @@ function draw() {
   text(s4, 300-width/2, 55-height/2);
   fill(66, 200, 244);
   rectMode(CENTER);
-  text(s5, 0, height/2, 180, 50);
+  text(s5, 0, height/2-20, 180, 50);
   
   //Game over screen
   var game;
