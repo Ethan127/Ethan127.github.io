@@ -1,7 +1,5 @@
 /* @pjs preload="Images/Background.png,Images/a1.png,Images/a2.png,Images/a3.png"; */
 
-import processing.sound.*;
-
 float moveX, centerX, X, velX, angle, aimR, mass, rectSL, theAngle, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record, Record;
 PImage backgroundI, rocket, ast1, ast2, ast3;
 boolean keyW, keyA, keyS, keyD, alive;
@@ -10,9 +8,6 @@ int numAst, timesDied, numAmo, amoNum, Score, numAstShot;
 Asteroid[] rocks;
 Amo[] bullets;
 float[] scores;
-SoundFile music;
-SoundFile rocketSound;
-SoundFile death;
 
 //Determines angle based on vector (x and y values) using inverse tangent
 float theAngle(float x, float y){
@@ -33,10 +28,6 @@ float theAngle(float x, float y){
 }
 
 void setup() { 
-  //Background music
-  music = new SoundFile(this, "Sounds/music.mp3");
-  death = new SoundFile(this, "Sounds/boom.mp3");
-  rocketSound = new SoundFile(this, "Sounds/rocket.mp3");
   backgroundI = loadImage("Images/Background.png");
   ast1 = loadImage("Images/a1.png");
   ast2 = loadImage("Images/a2.png");
@@ -267,35 +258,27 @@ void draw() {
 void keyPressed() {
     if (key == 'a') {
       keyA = true;
-      rocketSound.play();
     } else if (key == 'd') {
       keyD = true;
-      rocketSound.play();
     }else if (key == 'w') {
       keyW = true;
       rocket = loadImage(rocketImage2);
-      rocketSound.play();
     }else if (key == 's') {
       keyS = true;
-      rocketSound.play();
     }
 }
 void keyReleased() {
     if (key == 'a') {
       keyA = false;
-      rocketSound.stop();
       rocket = loadImage(rocketImage);
     } else if (key == 'd') {
       keyD = false;
-      rocketSound.stop();
       rocket = loadImage(rocketImage);
     }else if (key == 'w') {
       keyW = false;
-      rocketSound.stop();
       rocket = loadImage(rocketImage);
     }else if (key == 's') {
       keyS = false;
-      rocketSound.stop();
       rocket = loadImage(rocketImage);
     }
 }
