@@ -207,10 +207,10 @@ function draw() {
   fill(255,255,0);
   rectMode(CENTER);
 
-  text(s1, -150, 25-height/2, 250, 50); 
-  text(s2, 0, 25-height/2, 250, 50); 
-  text(s3, 150, 25-height/2, 250, 50); 
-  text(s4, 0, 55-height/2, 250, 50);
+  text(s1, -250, 25-height/2, 420, 50); 
+  text(s2, 0, 25-height/2, 420, 50); 
+  text(s3, 250, 25-height/2, 420, 50); 
+  text(s4, 0, 75-height/2, 420, 50);
 
   fill(66, 200, 244);
   text(s5, 0, height/2-20, 250, 50);
