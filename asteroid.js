@@ -219,7 +219,7 @@ function draw() {
   var minute = floor(seconds / 60);
   var second = floor(seconds % 60);
   var velocity = sqrt(velX*velX+velY*velY);
-  var rAngle = 360 - theAngle(mouseX-centerX, mouseY-centerY)*180/PI;
+  var rAngle = 360 - theAngle((mouseX-width/2)-centerX, (mouseY-height/2)-centerY)*180/PI;
   var vAngle = 360 - theAngle(velX, velY)*180/PI;
   
   var s1 = "Velocity: " + velocity + "m/s";
