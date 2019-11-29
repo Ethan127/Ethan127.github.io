@@ -1,4 +1,4 @@
-/* @pjs preload="Images/Background.png,Images/a1.png,Images/a2.png,Images/a3.png"; */
+/* @pjs preload="AsteroidBelt/Images/Background.png,AsteroidBelt/Images/a1.png,AsteroidBelt/Images/a2.png,AsteroidBelt/Images/a3.png"; */
 
 float moveX, centerX, X, velX, angle, aimR, mass, rectSL, theAngle, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record, Record;
 PImage backgroundI, rocket, ast1, ast2, ast3;
