@@ -1,3 +1,5 @@
+/* @pjs preload="Images/Background.png,Images/a1.png,Images/a2.png,Images/a3.png"; */
+
 import processing.sound.*;
 
 float moveX, centerX, X, velX, angle, aimR, mass, rectSL, theAngle, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record, Record;
@@ -11,6 +13,24 @@ float[] scores;
 SoundFile music;
 SoundFile rocketSound;
 SoundFile death;
+
+//Determines angle based on vector (x and y values) using inverse tangent
+float theAngle(float x, float y){
+  float tAngle = 0;
+  if (x>0 && y>0){
+    tAngle = atan(abs(y)/abs(x));
+  }
+  if (x>0 && y<0){
+    tAngle = 2*PI - atan(abs(y)/abs(x));
+  }
+  if (x<0 && y>0){
+    tAngle = atan(abs(x)/abs(y)) + PI/2;
+  }
+  if (x<0 && y<0){
+    tAngle = atan(abs(y)/abs(x))+PI;
+  }
+  return tAngle;
+}
 
 void setup() { 
   //Background music
@@ -278,24 +298,6 @@ void keyReleased() {
       rocketSound.stop();
       rocket = loadImage(rocketImage);
     }
-}
-
-//Determines angle based on vector (x and y values) using inverse tangent
-float theAngle(float x, float y){
-  float tAngle = 0;
-  if (x>0 && y>0){
-    tAngle = atan(abs(y)/abs(x));
-  }
-  if (x>0 && y<0){
-    tAngle = 2*PI - atan(abs(y)/abs(x));
-  }
-  if (x<0 && y>0){
-    tAngle = atan(abs(x)/abs(y)) + PI/2;
-  }
-  if (x<0 && y<0){
-    tAngle = atan(abs(y)/abs(x))+PI;
-  }
-  return tAngle;
 }
 
 //Asteroid Class
