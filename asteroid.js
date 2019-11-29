@@ -271,10 +271,10 @@ function draw() {
   text(survival, 0-250, 0+100);
   textSize(18);
   text(mess, 0-145, 0+150);
-  rectMode(RADIUS);
+  rectMode(CENTER);
   textSize(25);
   fill(66, 200, 244);
-  text(s6, 0, height/2-45, 250/2, 60/2);
+  text(s6, 10, height/2-50, 250, 60);
   fill(0, 0, 0, 255);
   rectMode(CENTER);
   text(highScore, 0, 0+60, 200, 50);
