@@ -39,20 +39,6 @@ function theAngle(x, y){
   return tAngle;
 }
 
-//Calculates high score
-function Record(){
-  var r = scores[0];
-  for (var i = 1; i < scores.length; i++) {
-    if (scores[i] > r) {
-      r = scores[i];
-    }
-  }
-  if (Score > r || isNaN(r)){
-    r = Score;
-  }
-  return r;
-}
-
 //Partially setups the game
 function partialSetup(){
   //Sets starting values for variables
@@ -115,6 +101,20 @@ function setup() {
   for (var x = 0; x < numAmo; x++) {
     bullets[x] = new Amo(0,0,0,0,0,0,0,0);
   }
+}
+
+//Calculates high score
+function Record(){
+  var r = scores[1];
+  for (var i = 1; i < scores.length; i++) {
+    if (scores[i] > r) {
+      r = scores[i];
+    }
+  }
+  if (Score > r || isNaN(r)){
+    r = Score;
+  }
+  return r;
 }
 
 function mouseClicked(){
