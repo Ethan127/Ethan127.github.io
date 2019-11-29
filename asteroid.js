@@ -162,11 +162,7 @@ function draw() {
   //Determines angle of rotation of spaceship (using inverse tangent)
   //If statements figure out what quadrant the mouse is in relative to the center
   //Function located below
-  angle = theAngle(mouseX-centerX+width/2, mouseY-centerY+height/2);
-  console.log("mousex: "+mouseX+"\n");
-  console.log("mousey: "+mouseX+"\n");
-  console.log("x: "+centerX+"\n");
-  console.log("y: "+centerY+"\n");
+  angle = theAngle((mouseX-width/2)-centerX, (mouseY-height/2)-centerY);
   
   //Translates space ship around unless it's on an edge
   moveX = moveX + velX/mass;
