@@ -356,8 +356,8 @@ class Asteroid {
     //Resets position if it goes to an edge
     if (this.xpos <= -width/2 || this.xpos >= width/2 || this.ypos <= -height/2 || this.ypos >= height/2){
       this.movement = 0;
-      this.startx=-this.startx;
-      this.starty=-this.starty;
+      this.startx = -this.startx;
+      this.starty = -this.starty;
     }
     //If the rocket collides with an asteroid, you die
     if (sqrt(pow((centerX - this.xpos),2)+pow((centerY - this.ypos),2))<=(this.size+sqrt(2)*rectSL/2)){
