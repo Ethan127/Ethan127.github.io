@@ -346,7 +346,7 @@ class Asteroid {
   }
   //Actually makes the asteroids
   display() {
-    fill(this.colora,this.colorb,cthis.olorc);
+    fill(this.colora,this.colorb,this.olorc);
     beginShape();
     if(this.aType == 1){
       texture(ast1);
