@@ -273,7 +273,7 @@ function draw() {
   rectMode(CENTER);
   textSize(25);
   fill(66, 200, 244);
-  text(s6, 0, height-30, 150, 50);
+  text(s6, 0, height/2-30, 150, 50);
   fill(0, 0, 0, 255);
   text(highScore, 0, 0+60, 200, 50);
   rectMode(CORNER); 
