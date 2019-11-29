@@ -91,7 +91,7 @@ function setup() {
   //Modifiable
   mass = 10;
   rectSL = 30;
-  numAst = 3;
+  numAst = 15;
   numAmo = 10; //Highest number of bullets on screen at once
   
   //Partially setups the game
@@ -404,7 +404,9 @@ class Amo {
       if (sqrt(pow(rocks[i].xpos-this.xpos,2)+pow(rocks[i].ypos-this.ypos,2))<this.size+rocks[i].size){
         numAstShot++;
         rocks[i].movement = 0;
-        var ran = floor(random(1,5));
+        rocks[i].startx = random(1-width/2,width/2-1);
+        rocks[i].starty = random(1-height/2,height/2-1);
+        /*var ran = floor(random(1,5));
         if(ran==1){
           rocks[i].startx = random(1-width,width-1);
           rocks[i].starty = 1-height;
@@ -420,7 +422,7 @@ class Amo {
         if(ran==4){
           rocks[i].startx = width-1;
           rocks[i].starty = random(1-height,height-1);
-        }
+        }*/
         //Essentially deletes amo when it hits an asteroid
         this.size = 0;
         this.velAmo = 0;
