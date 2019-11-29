@@ -274,7 +274,7 @@ function draw() {
   rectMode(RADIUS);
   textSize(25);
   fill(66, 200, 244);
-  text(s6, 0, height/2-45, 250, 60);
+  text(s6, 0, height/2-45, 250/2, 60/2);
   fill(0, 0, 0, 255);
   rectMode(CENTER);
   text(highScore, 0, 0+60, 200, 50);
