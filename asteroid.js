@@ -1,18 +1,19 @@
 var moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record;
-var backgroundI, rocket, ast1, ast2, ast3, rocketImage, rocketImage2;
+var backgroundI, rocket, ast1, ast2, ast3, rocketImage, rocketImage2, myFont;
 var keyW, keyA, keyS, keyD, alive;
 var numAst, timesDied, numAmo, amoNum, Score, numAstShot;
 var rocks, bullets;
 var scores;
 
 function preload() {
-  backgroundI = loadImage("Images/Background.png");
-  ast1 = loadImage("Images/a1.png");
-  ast2 = loadImage("Images/a2.png");
-  ast3 = loadImage("Images/a3.png");
-  rocket = loadImage("Images/rocketwithoutflame.png");
-  rocket1 = loadImage("Images/rocketwithoutflame.png");
-  rocket2 = loadImage("Images/rocket.png");
+  backgroundI = loadImage("assets/Background.png");
+  ast1 = loadImage("assets/a1.png");
+  ast2 = loadImage("assets/a2.png");
+  ast3 = loadImage("assets/a3.png");
+  rocket = loadImage("assets/rocketwithoutflame.png");
+  rocket1 = loadImage("assets/rocketwithoutflame.png");
+  rocket2 = loadImage("assets/rocket.png");
+  myFont = loadFont("/assets/montserrat/Montserrat-Bold.otf");
 }
 
 //Determines angle based on vector (x and y values) using inverse tangent
@@ -81,6 +82,7 @@ function setup() {
   
   //Partially setups the game
   partialSetup();
+  textFont(myFont);
   
   //Array of every score
   scores = new Array(500);
