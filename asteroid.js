@@ -138,7 +138,7 @@ function draw() {
   //Function located below
   angle = theA(mouseX-centerX, mouseY-centerY);
   
-  //Translates space ship around unless its on an edge
+  //Translates space ship around unless it's on an edge
   moveX = moveX + velX/mass;
   moveY = moveY + velY/mass;
   centerX = X+moveX;
