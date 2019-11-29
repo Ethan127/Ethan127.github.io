@@ -57,7 +57,7 @@ function partialSetup(){
 }
 
 function setup() { 
-  createCanvas(960, 540, P2D); 
+  createCanvas(960, 540, WEBGL); 
   noStroke();
   rectMode(CENTER);
   
@@ -118,7 +118,8 @@ function draw() {
   Score = (round(timeElapsed) + 1000*numAstShot)/10;
   
   //Sets background to space image
-  background(backgroundI);
+  //background(backgroundI);
+  background(0);
   
   //Updates location of rocks and amo
   for (const rock of rocks) {
@@ -221,9 +222,9 @@ function draw() {
     mess = "Just click your mouse to retry.";
     gameTrans = 200;
     s6= "";
-    highScore = "Score: " + Integer.tovar(Score);
+    highScore = "Score: " + Score;
   }else{
-    s6 = "Score: " + Integer.tovar(Score);
+    s6 = "Score: " + Score;
     highScore = "";
     survival = "";
     game = "";
@@ -356,14 +357,14 @@ class Asteroid {
     if(this.aType == 3){
       texture(ast3);
     }
-    this.px1 = this.xpos  +  size*sqrt(2)*cos(astR);
-    this.py1 = this.ypos  +  size*sqrt(2)*sin(astR);
-    this.px2 = this.xpos  +  size*sqrt(2)*cos(astR+PI/2);
-    this.py2 = this.ypos  +  size*sqrt(2)*sin(astR+PI/2);
-    this.px3 = this.xpos  +  size*sqrt(2)*cos(astR+PI);
-    this.py3 = this.ypos  +  size*sqrt(2)*sin(astR+PI);
-    this.px4 = this.xpos  +  size*sqrt(2)*cos(astR+3*PI/2);
-    this.py4 = this.ypos  +  size*sqrt(2)*sin(astR+3*PI/2);
+    this.px1 = this.xpos  +  this.size*sqrt(2)*cos(this.astR);
+    this.py1 = this.ypos  +  this.size*sqrt(2)*sin(this.astR);
+    this.px2 = this.xpos  +  this.size*sqrt(2)*cos(this.astR+PI/2);
+    this.py2 = this.ypos  +  this.size*sqrt(2)*sin(this.astR+PI/2);
+    this.px3 = this.xpos  +  this.size*sqrt(2)*cos(this.astR+PI);
+    this.py3 = this.ypos  +  this.size*sqrt(2)*sin(this.astR+PI);
+    this.px4 = this.xpos  +  this.size*sqrt(2)*cos(this.astR+3*PI/2);
+    this.py4 = this.ypos  +  this.size*sqrt(2)*sin(this.astR+3*PI/2);
     vertex(this.px1,this.py1, 0, 0);
     vertex(this.px2,this.py2, 600, 0);
     vertex(this.px3,this.py3, 600, 600);
