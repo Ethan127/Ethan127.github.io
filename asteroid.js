@@ -1,9 +1,8 @@
 var moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record;
-let backgroundI, rocket, ast1, ast2, ast3, rocketImage, rocketImage2;
+var backgroundI, rocket, ast1, ast2, ast3, rocketImage, rocketImage2;
 var keyW, keyA, keyS, keyD, alive;
 var numAst, timesDied, numAmo, amoNum, Score, numAstShot;
-/*Asteroid rocks[];
-Amo bullets[];*/
+var rocks, bullets;
 var scores;
 
 function preload() {
@@ -51,8 +50,8 @@ function partialSetup(){
   
   //An array of rocks
   rocks = new Array(numAst);
-  var index = 0;
-  for (var x = 0; x < numAst; x++) {
+  let index = 0;
+  for (let x = 0; x < numAst; x++) {
     rocks[index++] = new Asteroid(random(10,20), random(0,5), random(0,2*PI), random(255), random(255), random(255), random(width), random(height), floor(random(1,4)), random(-0.1,0.1));
   }
 }
