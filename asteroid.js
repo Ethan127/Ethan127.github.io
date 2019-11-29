@@ -406,23 +406,7 @@ class Amo {
         rocks[i].movement = 0;
         rocks[i].startx = random(1-width/2,width/2-1);
         rocks[i].starty = random(1-height/2,height/2-1);
-        /*var ran = floor(random(1,5));
-        if(ran==1){
-          rocks[i].startx = random(1-width,width-1);
-          rocks[i].starty = 1-height;
-        }
-        if(ran==2){
-          rocks[i].startx = random(1-width,width-1);
-          rocks[i].starty = height-1;
-        }
-        if(ran==3){
-          rocks[i].startx = 1-width;
-          rocks[i].starty = random(1-height,height-1);
-        }
-        if(ran==4){
-          rocks[i].startx = width-1;
-          rocks[i].starty = random(1-height,height-1);
-        }*/
+        
         //Essentially deletes amo when it hits an asteroid
         this.size = 0;
         this.velAmo = 0;
