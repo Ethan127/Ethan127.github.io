@@ -4,7 +4,7 @@ var keyW, keyA, keyS, keyD, alive;
 var numAst, timesDied, numAmo, amoNum, Score, numAstShot;
 var rocks, bullets;
 var scores;
-var music, rocketSound, death;
+var music, rocketSound, death, gun;
 
 function preload() {
   ast1 = loadImage("assets/a1.png");
@@ -18,6 +18,7 @@ function preload() {
   music = loadSound('assets/Sounds/music.mp3');
   rocketSound = loadSound('assets/Sounds/rocket.mp3');
   death = loadSound('assets/Sounds/boom.mp3');
+  gun = loadSound('assets/Sounds/laser.mp3');
 }
 
 //Determines angle based on vector (x and y values) using inverse tangent
@@ -124,6 +125,7 @@ function mouseClicked(){
   }
   //Shoots
   if(alive==true){
+    rocketSound.play();
     amoNum++;
     bullets[amoNum] = new Amo(5, 5, angle, random(255), random(255), random(255), centerX, centerY);
     if (amoNum == numAmo-1){
