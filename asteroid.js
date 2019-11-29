@@ -173,8 +173,8 @@ function draw() {
   if (centerX <= -width/2 || centerY <= -height/2 || centerX >= width/2 || centerY >= height/2){
     moveX = 0;
     moveY = 0;
-    Y = centerY - height;
-    X = centerX - width;
+    Y = -centerY;
+    X = -centerX;
   }
   
   //Trigonometry in a backwards coordinate plane is hard, OK?
