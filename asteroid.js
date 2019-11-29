@@ -12,6 +12,7 @@ function preload() {
   rocket = loadImage("assets/rocketwithoutflame.png");
   rocket1 = loadImage("assets/rocketwithoutflame.png");
   rocket2 = loadImage("assets/rocket.png");
+  backgroundI = loadImage("assets/Background.png");
   myFont = loadFont("/assets/montserrat/Montserrat-Bold.otf");
 }
 
@@ -111,6 +112,15 @@ function mouseClicked(){
 }
 
 function draw() {
+  //Background
+  beginShape();
+  texture(backgroundI);
+  vertex(-width/2,height/2);
+  vertex(width/2,height/2);
+  vertex(width/2,-height/2);
+  vertex(-width/2,-height/2);
+  endShape();
+
   //Checks time passed
   timeElapsed = millis() - startTime - TOD;
   seconds = timeElapsed / 1000;
