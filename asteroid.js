@@ -41,8 +41,8 @@ function partialSetup(){
   moveY = 0;
   centerX = 1;
   centerY = 1;
-  X = width/2;
-  Y = height/2;
+  X = 0;
+  Y = 0;
   velX = random(-1,1);
   velY = random(-1,1);
   aimR = 0;
