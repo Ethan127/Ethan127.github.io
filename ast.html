@@ -1,11 +1,14 @@
 <html>
     <head>
-        <title>Hello Web - Processing.js Test</title>
+        <title>Asteroid Game</title>
         <script src="processing.min.js"></script>
     </head>
     <body>
-        <h1>Processing.js Test</h1>
-        <p>This is my first Processing.js web-based sketch:</p>
-        <canvas data-processing-sources="AsteroidBelt/test.pde"></canvas>
+        <canvas id="myCanvas" data-processing-sources="AsteroidBelt/test.pde"></canvas>
+        <script>
+            var canvas = document.getElementById("myCanvas");
+            canvas.width  = window.innerWidth-20;
+            canvas.height = window.innerHeight-20;
+        </script>
     </body>
 </html>
