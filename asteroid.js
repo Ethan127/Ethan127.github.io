@@ -426,8 +426,8 @@ class Amo {
       if (sqrt(pow(rocks[i].xpos-this.xpos,2)+pow(rocks[i].ypos-this.ypos,2))<this.size+rocks[i].size){
         numAstShot++;
         rocks[i].movement = 0;
-        this.xpos = 0;
-        this.ypos = 0;
+        rocks[i].xpos = 0;
+        rocks[i].ypos = 0;
         this.ran = floor(random(1,5));
         if(this.ran==1){
           rocks[i].startx = random(1-width/2,width/2-1);
