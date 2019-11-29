@@ -82,7 +82,7 @@ function setup() {
   //Modifiable
   mass = 10;
   rectSL = 30;
-  numAst = 1;
+  numAst = 15;
   AmoV = 12;
   numAmo = 10; //Highest number of bullets on screen at once
 
@@ -360,7 +360,6 @@ class Asteroid {
       this.starty = -this.starty;
       this.xpos = -this.xpos;
       this.ypos = -this.ypos;
-      console.log("ptoaosf;");
     }
     //If the rocket collides with an asteroid, you die
     if (sqrt(pow((centerX - this.xpos),2)+pow((centerY - this.ypos),2))<=(this.size+sqrt(2)*rectSL/2)){
@@ -429,20 +428,20 @@ class Amo {
         rocks[i].movement = 0;
         this.ran = floor(random(1,5));
         if(this.ran==1){
-          rocks[i].startx = random(1,width-1);
-          rocks[i].starty = 1;
+          rocks[i].startx = random(1-width/2,width/2-1);
+          rocks[i].starty = 1-height/2;
         }
         if(this.ran==2){
-          rocks[i].startx = random(1,width-1);
+          rocks[i].startx = random(1-width/2,width/2-1);
           rocks[i].starty = height-1;
         }
         if(this.ran==3){
-          rocks[i].startx = 1;
-          rocks[i].starty = random(1,height-1);
+          rocks[i].startx = 1-width/2;
+          rocks[i].starty = random(1-height/2,height/2-1);
         }
         if(this.ran==4){
           rocks[i].startx = width-1;
-          rocks[i].starty = random(1,height-1);
+          rocks[i].starty = random(1-height/2,height/2-1);
         }
         //Essentially deletes amo when it hits an asteroid
         this.size = 0;
