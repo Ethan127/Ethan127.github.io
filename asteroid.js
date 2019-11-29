@@ -202,7 +202,7 @@ function draw() {
   var s2 = "Angle of velocity: " + vAngle + "\u00b0";
   var s3 = "Angle of rotation: " + rAngle + "\u00b0";
   var s4 = "You have survived " + minute + " minutes and " + second + " seconds.";
-  var s5 = "Your high score is " + (round(Record())==NaN ? Score : round(Record()));
+  var s5 = "Your high score is " + round(Record());
   textSize(15);
   fill(255,255,0);
   rectMode(CENTER);
