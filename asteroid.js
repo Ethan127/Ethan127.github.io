@@ -298,69 +298,77 @@ class Asteroid {
     this.ypos = 0;
     this.astR = 0;
     this.movement = 0;
+    this.ran=0;
+    this.px1 = 0;
+    this.py1 = 0;
+    this.px2 = 0;
+    this.py2 = 0;
+    this.px3 = 0;
+    this.py3 = 0;
+    this.px4 = 0;
+    this.py4 = 0;
   }
   //Constantly moves in a direction
   update() {
-    xpos = startx + movement * cos(aDir);
-    ypos = starty + movement * sin(aDir);
-    astR = astR + astRot;
-    movement += velA;
+    this.xpos = this.startx + this.movement * cos(this.aDir);
+    this.ypos = this.starty + this.movement * sin(this.aDir);
+    this.astR = this.astR + this.astRot;
+    this.movement += this.velA;
     //Resets position if it goes to an edge
-    if (xpos <= 0 || xpos >= width || ypos <= 0 || ypos >= height){
-      movement = 0;
-      var ran = floor(random(1,5));
-      if(ran==1){
-        startx = random(1,width-1);
-        starty = 1;
+    if (this.xpos <= 0 || this.xpos >= width || this.ypos <= 0 || this.ypos >= height){
+      this.movement = 0;
+      this.ran = floor(random(1,5));
+      if(this.ran==1){
+        this.startx = random(1,width-1);
+        this.starty = 1;
       }
-      if(ran==2){
-        startx = random(1,width-1);
-        starty = height-1;
+      if(this.ran==2){
+        this.startx = random(1,width-1);
+        this.starty = height-1;
       }
-      if(ran==3){
-        startx = 1;
-        starty = random(1,height-1);
+      if(this.ran==3){
+        this.startx = 1;
+        this.starty = random(1,height-1);
       }
-      if(ran==4){
-        startx = width-1;
-        starty = random(1,height-1);
+      if(this.ran==4){
+        this.startx = width-1;
+        this.starty = random(1,height-1);
       }
     }
     //If the rocket collides with an asteroid, you die
-    if (sqrt(pow((centerX - xpos),2)+pow((centerY - ypos),2))<=(createCanvas+sqrt(2)*rectSL/2)){
+    if (sqrt(pow((centerX - this.xpos),2)+pow((centerY - this.ypos),2))<=(this.size+sqrt(2)*rectSL/2)){
       alive = false;
       noLoop();
       TOD = millis() - startTime;
       timesDied++;
       scores[timesDied] = Score;
-      death.play();
     }
   }
   //Actually makes the asteroids
   display() {
-    fill(colora,colorb,colorc);
+    fill(this.colora,this.colorb,cthis.olorc);
     beginShape();
-    if(aType == 1){
+    if(this.aType == 1){
       texture(ast1);
     }
-    if(aType == 2){
+    if(this.aType == 2){
       texture(ast2);
     }
-    if(aType == 3){
+    if(this.aType == 3){
       texture(ast3);
     }
-    var px1 = xpos  +  createCanvas*sqrt(2)*cos(astR);
-    var py1 = ypos  +  createCanvas*sqrt(2)*sin(astR);
-    var px2 = xpos  +  createCanvas*sqrt(2)*cos(astR+PI/2);
-    var py2 = ypos  +  createCanvas*sqrt(2)*sin(astR+PI/2);
-    var px3 = xpos  +  createCanvas*sqrt(2)*cos(astR+PI);
-    var py3 = ypos  +  createCanvas*sqrt(2)*sin(astR+PI);
-    var px4 = xpos  +  createCanvas*sqrt(2)*cos(astR+3*PI/2);
-    var py4 = ypos  +  createCanvas*sqrt(2)*sin(astR+3*PI/2);
-    vertex(px1,py1, 0, 0);
-    vertex(px2,py2, 600, 0);
-    vertex(px3,py3, 600, 600);
-    vertex(px4,py4, 0, 600);
+    this.px1 = this.xpos  +  size*sqrt(2)*cos(astR);
+    this.py1 = this.ypos  +  size*sqrt(2)*sin(astR);
+    this.px2 = this.xpos  +  size*sqrt(2)*cos(astR+PI/2);
+    this.py2 = this.ypos  +  size*sqrt(2)*sin(astR+PI/2);
+    this.px3 = this.xpos  +  size*sqrt(2)*cos(astR+PI);
+    this.py3 = this.ypos  +  size*sqrt(2)*sin(astR+PI);
+    this.px4 = this.xpos  +  size*sqrt(2)*cos(astR+3*PI/2);
+    this.py4 = this.ypos  +  size*sqrt(2)*sin(astR+3*PI/2);
+    vertex(this.px1,this.py1, 0, 0);
+    vertex(this.px2,this.py2, 600, 0);
+    vertex(this.px3,this.py3, 600, 600);
+    vertex(this.px4,this.py4, 0, 600);
     endShape();
   }
 }
@@ -397,12 +405,12 @@ class Amo {
   }
   //Constantly moves in a direction
   update() {
-    xpos = startx + movement * cos(aDir);
-    ypos = starty + movement * sin(aDir);
-    movement += velAmo;
+    this.xpos = this.startx + this.movement * cos(this.aDir);
+    this.ypos = this.starty + this.movement * sin(this.aDir);
+    this.movement += this.velAmo;
     //Resets asteroid if it gets hit by amo
     for (var i = 0; i<rocks.length; i++) {
-      if (sqrt(pow(rocks[i].xpos-this.xpos,2)+pow(rocks[i].ypos-this.ypos,2))<this.createCanvas+rocks[i].createCanvas){
+      if (sqrt(pow(rocks[i].xpos-this.xpos,2)+pow(rocks[i].ypos-this.ypos,2))<this.size+rocks[i].size){
         numAstShot++;
         rocks[i].movement = 0;
         var ran = floor(random(1,5));
@@ -423,7 +431,7 @@ class Amo {
           rocks[i].starty = random(1,height-1);
         }
         //Essentially deletes amo when it hits an asteroid
-        this.createCanvas = 0;
+        this.size = 0;
         this.velAmo = 0;
         this.aDir = 0;
         this.colora = 0;
@@ -437,7 +445,7 @@ class Amo {
     }
   }
   display() {
-    fill(colora,colorb,colorc);
-    ellipse(xpos,ypos,createCanvas,createCanvas);
+    fill(this.colora,this.colorb,this.colorc);
+    ellipse(this.xpos,this.ypos,this.size,this.size);
   }
 }
