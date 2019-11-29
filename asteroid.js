@@ -263,7 +263,7 @@ function draw() {
   }
   rectMode(RADIUS);
   fill(0,255,100,gameTrans);
-  rect(0, 0+50, 300, 125, 100);
+  rect(0, 50, 300, 125, 15);
   textSize(50);
   fill(0,0,0, 255);
   text(game, 0-143, 0);
@@ -365,6 +365,7 @@ class Asteroid {
       TOD = millis() - startTime;
       timesDied++;
       scores[timesDied] = Score;
+      console.log(scores[timesDied]);
       death.play();
     }
   }
