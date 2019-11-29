@@ -387,7 +387,7 @@ function Record(){
       r = scores[i];
     }
   }
-  if (Score > r){
+  if (Score > r || isNaN(r)){
     r = Score;
   }
   return r;
