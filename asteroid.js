@@ -356,8 +356,8 @@ class Asteroid {
     //Resets position if it goes to an edge
     if (this.xpos <= -width/2 || this.xpos >= width/2 || this.ypos <= -height/2 || this.ypos >= height/2){
       this.movement = 0;
-      this.startx=1-this.startx;
-      this.starty=1-this.starty;
+      this.startx=-this.startx;
+      this.starty=-this.starty;
     }
     //If the rocket collides with an asteroid, you die
     if (sqrt(pow((centerX - this.xpos),2)+pow((centerY - this.ypos),2))<=(this.size+sqrt(2)*rectSL/2)){
@@ -420,13 +420,27 @@ class Amo {
     this.ypos = this.starty + this.movement * sin(this.aDir);
     this.movement += this.velAmo;
     //Resets asteroid if it gets hit by amo
-    for (var i = 0; i<rocks.length; i++) {
+    for (let i = 0; i<rocks.length; i++) {
       if (sqrt(pow(rocks[i].xpos-this.xpos,2)+pow(rocks[i].ypos-this.ypos,2))<this.size+rocks[i].size){
         numAstShot++;
         rocks[i].movement = 0;
-        rocks[i].startx = random(1-width/2,width/2-1);
-        rocks[i].starty = random(1-height/2,height/2-1);
-        
+        this.ran = floor(random(1,5));
+        if(this.ran==1){
+          rocks[i].startx = random(1,width-1);
+          rocks[i].starty = 1;
+        }
+        if(this.ran==2){
+          rocks[i].startx = random(1,width-1);
+          rocks[i].starty = height-1;
+        }
+        if(this.ran==3){
+          rocks[i].startx = 1;
+          rocks[i].starty = random(1,height-1);
+        }
+        if(this.ran==4){
+          rocks[i].startx = width-1;
+          rocks[i].starty = random(1,height-1);
+        }
         //Essentially deletes amo when it hits an asteroid
         this.size = 0;
         this.velAmo = 0;
