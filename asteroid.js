@@ -360,6 +360,7 @@ class Asteroid {
       this.starty = -this.starty;
       this.xpos = -this.xpos;
       this.ypos = -this.ypos;
+      console.log("ptoaosf;");
     }
     //If the rocket collides with an asteroid, you die
     if (sqrt(pow((centerX - this.xpos),2)+pow((centerY - this.ypos),2))<=(this.size+sqrt(2)*rectSL/2)){
