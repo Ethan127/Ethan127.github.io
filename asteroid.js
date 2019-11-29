@@ -1,13 +1,26 @@
 /* @pjs preload="Images/Background.png, Images/a1.png, Images/a2.png, Images/a3.png, Images/rocketwithoutflame.png, Images/rocket.png"; */
 
 var moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record;
-var backgroundI, rocket, ast1, ast2, ast3;
+let backgroundI, rocket, ast1, ast2, ast3, rocketImage, rocketImage2;
 var keyW, keyA, keyS, keyD, alive;
-var rocketImage, rocketImage2;
 var numAst, timesDied, numAmo, amoNum, Score, numAstShot;
 /*Asteroid rocks[];
 Amo bullets[];*/
 var scores;
+
+function preload() {
+  img = loadImage('assets/laDefense.jpg');
+  backgroundI = loadImage("Images/Background.png");
+  ast1 = loadImage("Images/a1.png");
+  ast2 = loadImage("Images/a2.png");
+  ast3 = loadImage("Images/a3.png");
+  rocket = loadImage("Images/rocketwithoutflame.png");
+  rocket1 = loadImage("Images/rocketwithoutflame.png");
+  rocket2 = loadImage("Images/rocket.png");
+}
+function setup() {
+  image(img, 0, 0);
+}
 
 //Determines angle based on vector (x and y values) using inverse tangent
 function theA(x, y){
@@ -27,19 +40,35 @@ function theA(x, y){
   return tAngle;
 }
 
+//Partially setups the game
+function partialSetup(){
+  //Sets starting values for variables
+  moveX = 0;
+  moveY = 0;
+  centerX = 1;
+  centerY = 1;
+  X = width/2;
+  Y = height/2;
+  velX = random(-1,1);
+  velY = random(-1,1);
+  aimR = 0;
+  Score = 0;
+  numAstShot = 0;
+  
+  //An array of rocks
+  rocks = new Array(numAst);
+  var index = 0;
+  for (var x = 0; x < numAst; x++) {
+    rocks[index++] = new Asteroid(random(10,20), random(0,5), random(0,2*PI), random(255), random(255), random(255), random(width), random(height), floor(random(1,4)), random(-0.1,0.1));
+  }
+}
+
 function setup() { 
-  backgroundI = loadImage("Images/Background.png");
-  ast1 = loadImage("Images/a1.png");
-  ast2 = loadImage("Images/a2.png");
-  ast3 = loadImage("Images/a3.png");
   createCanvas(960, 540, P2D); 
   noStroke();
   rectMode(CENTER);
   
   //Sets starting values for variables
-  rocketImage = "Images/rocketwithoutflame.png";
-  rocketImage2 = "Images/rocket.png";
-  rocket = loadImage(rocketImage);
   keyW = false;
   keyA = false;
   keyS = false;
@@ -67,29 +96,6 @@ function setup() {
   bullets = new Array(numAmo);
   for (var x = 0; x < numAmo; x++) {
     bullets[x] = new Amo(0,0,0,0,0,0,0,0);
-  }
-}
-
-//Partially setups the game
-function partialSetup(){
-  //Sets starting values for variables
-  moveX = 0;
-  moveY = 0;
-  centerX = 1;
-  centerY = 1;
-  X = width/2;
-  Y = height/2;
-  velX = random(-1,1);
-  velY = random(-1,1);
-  aimR = 0;
-  Score = 0;
-  numAstShot = 0;
-  
-  //An array of rocks
-  rocks = new Array(numAst);
-  var index = 0;
-  for (var x = 0; x < numAst; x++) {
-    rocks[index++] = new Asteroid(random(10,20), random(0,5), random(0,2*PI), random(255), random(255), random(255), random(width), random(height), floor(random(1,4)), random(-0.1,0.1));
   }
 }
 
@@ -259,7 +265,7 @@ function keyPressed() {
       keyD = true;
     }else if (key == 'w') {
       keyW = true;
-      rocket = loadImage(rocketImage2);
+      rocket = rocket2;
     }else if (key == 's') {
       keyS = true;
     }
@@ -267,16 +273,16 @@ function keyPressed() {
 function keyReleased() {
     if (key == 'a') {
       keyA = false;
-      rocket = loadImage(rocketImage);
+      rocket = rocket1;
     } else if (key == 'd') {
       keyD = false;
-      rocket = loadImage(rocketImage);
+      rocket = rocket1;
     }else if (key == 'w') {
       keyW = false;
-      rocket = loadImage(rocketImage);
+      rocket = rocket1;
     }else if (key == 's') {
       keyS = false;
-      rocket = loadImage(rocketImage);
+      rocket = rocket1;
     }
 }
 
