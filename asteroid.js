@@ -6,7 +6,6 @@ var rocks, bullets;
 var scores;
 
 function preload() {
-  backgroundI = loadImage("assets/Background.png");
   ast1 = loadImage("assets/a1.png");
   ast2 = loadImage("assets/a2.png");
   ast3 = loadImage("assets/a3.png");
@@ -118,10 +117,6 @@ function draw() {
   
   //Score keeper
   Score = (round(timeElapsed) + 1000*numAstShot)/10;
-  
-  //Sets background to space image
-  //background(backgroundI);
-  background(0);
   
   //Updates location of rocks and amo
   for (const rock of rocks) {
