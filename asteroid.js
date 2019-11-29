@@ -207,9 +207,9 @@ function draw() {
   fill(255,255,0);
   rectMode(CENTER);
 
-  text(s1, -250, 25-height/2, 420, 50); 
+  text(s1, -350, 25-height/2, 420, 50); 
   text(s2, 0, 25-height/2, 420, 50); 
-  text(s3, 250, 25-height/2, 420, 50); 
+  text(s3, 350, 25-height/2, 420, 50); 
   text(s4, 0, 75-height/2, 420, 50);
 
   fill(66, 200, 244);
