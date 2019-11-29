@@ -1,6 +1,6 @@
 /* @pjs preload="AsteroidBelt/Images/Background.png,AsteroidBelt/Images/a1.png,AsteroidBelt/Images/a2.png,AsteroidBelt/Images/a3.png"; */
 
-float moveX, centerX, X, velX, angle, aimR, mass, rectSL, theA, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record, Record;
+float moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record;
 PImage backgroundI, rocket, ast1, ast2, ast3;
 boolean keyW, keyA, keyS, keyD, alive;
 String rocketImage, rocketImage2;
@@ -56,9 +56,6 @@ void setup() {
   rectSL = 30;
   numAst = 15;
   numAmo = 10; //Highest number of bullets on screen at once
-  
-  //Plays music
-  music.loop(1,0.5);
   
   //Partially setups the game
   partialSetup();
