@@ -91,7 +91,7 @@ function setup() {
   //Modifiable
   mass = 10;
   rectSL = 30;
-  numAst = 15;
+  numAst = 3;
   numAmo = 10; //Highest number of bullets on screen at once
   
   //Partially setups the game
@@ -337,23 +337,6 @@ class Asteroid {
     //Resets position if it goes to an edge
     if (this.xpos <= -width/2 || this.xpos >= width/2 || this.ypos <= -height/2 || this.ypos >= height/2){
       this.movement = 0;
-      /*this.ran = floor(random(1,5));
-      if(this.ran==1){
-        this.startx = random(1-width,width-1);
-        this.starty = 1-height;
-      }
-      if(this.ran==2){
-        this.startx = random(1-width,width-1);
-        this.starty = height-1;
-      }
-      if(this.ran==3){
-        this.startx = 1-height;
-        this.starty = random(1-height,height-1);
-      }
-      if(this.ran==4){
-        this.startx = width-1;
-        this.starty = random(1-height,height-1);
-      }*/
       this.startx=1-this.startx;
       this.starty=1-this.starty;
     }
