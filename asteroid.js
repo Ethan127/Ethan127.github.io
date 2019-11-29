@@ -57,7 +57,7 @@ function partialSetup(){
 }
 
 function setup() { 
-  createCanvas(960*2, 540*2, WEBGL); 
+  createCanvas(windowWidth, windowHeight, WEBGL); 
   noStroke();
   rectMode(CENTER);
   
