@@ -34,6 +34,20 @@ function theAngle(x, y){
   return tAngle;
 }
 
+//Calculates high score
+function Record(){
+  var r = scores[0];
+  for (var i = 1; i < scores.length; i++) {
+    if (scores[i] > r) {
+      r = scores[i];
+    }
+  }
+  if (Score > r || isNaN(r)){
+    r = Score;
+  }
+  return r;
+}
+
 //Partially setups the game
 function partialSetup(){
   //Sets starting values for variables
@@ -323,7 +337,7 @@ class Asteroid {
     //Resets position if it goes to an edge
     if (this.xpos <= -width/2 || this.xpos >= width/2 || this.ypos <= -height/2 || this.ypos >= height/2){
       this.movement = 0;
-      this.ran = floor(random(1,5));
+      /*this.ran = floor(random(1,5));
       if(this.ran==1){
         this.startx = random(1-width,width-1);
         this.starty = 1-height;
@@ -339,7 +353,9 @@ class Asteroid {
       if(this.ran==4){
         this.startx = width-1;
         this.starty = random(1-height,height-1);
-      }
+      }*/
+      this.startx=1-this.startx;
+      this.starty=1-this.starty;
     }
     //If the rocket collides with an asteroid, you die
     if (sqrt(pow((centerX - this.xpos),2)+pow((centerY - this.ypos),2))<=(this.size+sqrt(2)*rectSL/2)){
@@ -377,20 +393,6 @@ class Asteroid {
     vertex(this.px4,this.py4, 0, 600);
     endShape();
   }
-}
-
-//Calculates high score
-function Record(){
-  var r = scores[0];
-  for (var i = 1; i < scores.length; i++) {
-    if (scores[i] > r) {
-      r = scores[i];
-    }
-  }
-  if (Score > r || isNaN(r)){
-    r = Score;
-  }
-  return r;
 }
 
 
