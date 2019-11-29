@@ -82,7 +82,7 @@ function setup() {
   //Modifiable
   mass = 10;
   rectSL = 30;
-  numAst = 15;
+  numAst = 1;
   AmoV = 12;
   numAmo = 10; //Highest number of bullets on screen at once
 
