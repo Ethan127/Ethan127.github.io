@@ -238,7 +238,7 @@ function draw() {
   rect(0, 0+50, 300, 125, 100);
   textSize(50);
   fill(0,0,0, 255);
-  text(game, 0-143, height/2);
+  text(game, 0-143, 0);
   textSize(25);
   text(survival, 0-250, 0+100);
   textSize(18);
