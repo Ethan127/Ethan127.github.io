@@ -1,17 +1,17 @@
 /* @pjs preload="Images/Background.png, Images/a1.png, Images/a2.png, Images/a3.png, Images/rocketwithoutflame.png, Images/rocket.png"; */
 
-float moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record;
-PImage backgroundI, rocket, ast1, ast2, ast3;
-boolean keyW, keyA, keyS, keyD, alive;
-String rocketImage, rocketImage2;
-int numAst, timesDied, numAmo, amoNum, Score, numAstShot;
-Asteroid[] rocks;
-Amo[] bullets;
-float[] scores;
+var moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record;
+var backgroundI, rocket, ast1, ast2, ast3;
+var keyW, keyA, keyS, keyD, alive;
+var rocketImage, rocketImage2;
+var numAst, timesDied, numAmo, amoNum, Score, numAstShot;
+/*Asteroid rocks[];
+Amo bullets[];*/
+var scores;
 
 //Determines angle based on vector (x and y values) using inverse tangent
-float theA(float x, float y){
-  float tAngle = 0;
+function theA(x, y){
+  var tAngle = 0;
   if (x>0 && y>0){
     tAngle = atan(abs(y)/abs(x));
   }
@@ -27,12 +27,12 @@ float theA(float x, float y){
   return tAngle;
 }
 
-void setup() { 
+function setup() { 
   backgroundI = loadImage("Images/Background.png");
   ast1 = loadImage("Images/a1.png");
   ast2 = loadImage("Images/a2.png");
   ast3 = loadImage("Images/a3.png");
-  size(960, 540, P2D); 
+  createCanvas(960, 540, P2D); 
   noStroke();
   rectMode(CENTER);
   
@@ -61,17 +61,17 @@ void setup() {
   partialSetup();
   
   //Array of every score
-  scores = new float[500];
+  scores = new Array(500);
   
   //Array of amo
-  bullets = new Amo[numAmo];
-  for (int x = 0; x < numAmo; x++) {
+  bullets = new Array(numAmo);
+  for (var x = 0; x < numAmo; x++) {
     bullets[x] = new Amo(0,0,0,0,0,0,0,0);
   }
 }
 
 //Partially setups the game
-void partialSetup(){
+function partialSetup(){
   //Sets starting values for variables
   moveX = 0;
   moveY = 0;
@@ -86,14 +86,14 @@ void partialSetup(){
   numAstShot = 0;
   
   //An array of rocks
-  rocks = new Asteroid[numAst];
-  int index = 0;
-  for (int x = 0; x < numAst; x++) {
+  rocks = new Array(numAst);
+  var index = 0;
+  for (var x = 0; x < numAst; x++) {
     rocks[index++] = new Asteroid(random(10,20), random(0,5), random(0,2*PI), random(255), random(255), random(255), random(width), random(height), floor(random(1,4)), random(-0.1,0.1));
   }
 }
 
-void mouseClicked(){
+function mouseClicked(){
   //Revives you
   if(alive==false){
     alive = true;
@@ -110,7 +110,7 @@ void mouseClicked(){
   }
 }
 
-void draw() {
+function draw() {
   //Checks time passed
   timeElapsed = millis() - startTime - TOD;
   seconds = timeElapsed / 1000;
@@ -122,11 +122,11 @@ void draw() {
   background(backgroundI);
   
   //Updates location of rocks and amo
-  for (Asteroid rock : rocks) {
+  for (const rock of rocks) {
     rock.update();
     rock.display();
   }
-  for (Amo bullet : bullets) {
+  for (const bullet of bullets) {
     bullet.update();
     bullet.display();
   }
@@ -151,14 +151,14 @@ void draw() {
   
   //Trigonometry in a backwards coordinate plane is hard, OK?
   //Manual rotation of polygon vector coordinates
-  float a1 = centerX  +  rectSL*sqrt(2)*cos(angle);
-  float b1 = centerY  +  rectSL*sqrt(2)*sin(angle);
-  float a2 = centerX  +  rectSL*sqrt(2)*cos(angle+PI/2);
-  float b2 = centerY  +  rectSL*sqrt(2)*sin(angle+PI/2);
-  float a3 = centerX  +  rectSL*sqrt(2)*cos(angle+PI);
-  float b3 = centerY  +  rectSL*sqrt(2)*sin(angle+PI);
-  float a4 = centerX  +  rectSL*sqrt(2)*cos(angle+3*PI/2);
-  float b4 = centerY  +  rectSL*sqrt(2)*sin(angle+3*PI/2);
+  var a1 = centerX  +  rectSL*sqrt(2)*cos(angle);
+  var b1 = centerY  +  rectSL*sqrt(2)*sin(angle);
+  var a2 = centerX  +  rectSL*sqrt(2)*cos(angle+PI/2);
+  var b2 = centerY  +  rectSL*sqrt(2)*sin(angle+PI/2);
+  var a3 = centerX  +  rectSL*sqrt(2)*cos(angle+PI);
+  var b3 = centerY  +  rectSL*sqrt(2)*sin(angle+PI);
+  var a4 = centerX  +  rectSL*sqrt(2)*cos(angle+3*PI/2);
+  var b4 = centerY  +  rectSL*sqrt(2)*sin(angle+3*PI/2);
   
   //Creates square that I can easily manipulate
   beginShape();
@@ -188,17 +188,17 @@ void draw() {
   }
   
   //Displays information on screen
-  int minute = floor(seconds / 60);
-  int second = floor(seconds % 60);
-  float velocity = sqrt(velX*velX+velY*velY);
-  float rAngle = 360 - theA(mouseX-centerX, mouseY-centerY)*180/PI;
-  float vAngle = 360 - theA(velX, velY)*180/PI;
+  var minute = floor(seconds / 60);
+  var second = floor(seconds % 60);
+  var velocity = sqrt(velX*velX+velY*velY);
+  var rAngle = 360 - theA(mouseX-centerX, mouseY-centerY)*180/PI;
+  var vAngle = 360 - theA(velX, velY)*180/PI;
   
-  String s1 = "Velocity: " + velocity + "m/s";
-  String s2 = "Angle of velocity: " + vAngle + "\u00b0";
-  String s3 = "Angle of rotation: " + rAngle + "\u00b0";
-  String s4 = "You have survived " + minute + " minutes and " + second + " seconds.";
-  String s5 = "Your high score is " + round(Record());
+  var s1 = "Velocity: " + velocity + "m/s";
+  var s2 = "Angle of velocity: " + vAngle + "\u00b0";
+  var s3 = "Angle of rotation: " + rAngle + "\u00b0";
+  var s4 = "You have survived " + minute + " minutes and " + second + " seconds.";
+  var s5 = "Your high score is " + round(Record());
   textSize(15);
   fill(255,255,0);
   text(s1, 25, 25); 
@@ -210,21 +210,21 @@ void draw() {
   text(s5, width/2, height, 180, 50);
   
   //Game over screen
-  String game;
-  String survival;
-  String mess;
-  int gameTrans;
-  String highScore;
-  String s6;
+  var game;
+  var survival;
+  var mess;
+  var gameTrans;
+  var highScore;
+  var s6;
   if(alive==false){
     survival = "You survived for " + minute + " minutes and " + second + " seconds.";
     game = "Game Over";
     mess = "Just click your mouse to retry.";
     gameTrans = 200;
     s6= "";
-    highScore = "Score: " + Integer.toString(Score);
+    highScore = "Score: " + Integer.tovar(Score);
   }else{
-    s6 = "Score: " + Integer.toString(Score);
+    s6 = "Score: " + Integer.tovar(Score);
     highScore = "";
     survival = "";
     game = "";
@@ -252,7 +252,7 @@ void draw() {
 
 
 //Key press events
-void keyPressed() {
+function keyPressed() {
     if (key == 'a') {
       keyA = true;
     } else if (key == 'd') {
@@ -264,7 +264,7 @@ void keyPressed() {
       keyS = true;
     }
 }
-void keyReleased() {
+function keyReleased() {
     if (key == 'a') {
       keyA = false;
       rocket = loadImage(rocketImage);
@@ -282,38 +282,25 @@ void keyReleased() {
 
 //Asteroid Class
 class Asteroid {
-  float size;
-  float velA;
-  float aDir;
-  float colora;
-  float colorb;
-  float colorc;
-  float xpos;
-  float ypos;
-  float startx;
-  float starty;
-  float movement;
-  int aType;
-  float astRot;
-  float astR;
   //Contructor
-  Asteroid(float i1, float i2, float i3, float i4, float i5, float i6, float i7, float i8, int i9, float i10) {
-    size = i1;
-    velA = i2;
-    aDir = i3;
-    colora = i4;
-    colorb = i5;
-    colorc = i6;
-    startx = i7;
-    starty = i8;
-    aType = i9;
-    astRot = i10;
-    xpos = 0;
-    ypos = 0;
-    astR = 0;
+  constructor( i1,  i2,  i3,  i4,  i5,  i6,  i7,  i8,  i9,  i10) {
+    this.size = i1;
+    this.velA = i2;
+    this.aDir = i3;
+    this.colora = i4;
+    this.colorb = i5;
+    this.colorc = i6;
+    this.startx = i7;
+    this.starty = i8;
+    this.aType = i9;
+    this.astRot = i10;
+    this.xpos = 0;
+    this.ypos = 0;
+    this.astR = 0;
+    this.movement = 0;
   }
   //Constantly moves in a direction
-  void update() {
+  update() {
     xpos = startx + movement * cos(aDir);
     ypos = starty + movement * sin(aDir);
     astR = astR + astRot;
@@ -321,7 +308,7 @@ class Asteroid {
     //Resets position if it goes to an edge
     if (xpos <= 0 || xpos >= width || ypos <= 0 || ypos >= height){
       movement = 0;
-      int ran = floor(random(1,5));
+      var ran = floor(random(1,5));
       if(ran==1){
         startx = random(1,width-1);
         starty = 1;
@@ -340,7 +327,7 @@ class Asteroid {
       }
     }
     //If the rocket collides with an asteroid, you die
-    if (sqrt(pow((centerX - xpos),2)+pow((centerY - ypos),2))<=(size+sqrt(2)*rectSL/2)){
+    if (sqrt(pow((centerX - xpos),2)+pow((centerY - ypos),2))<=(createCanvas+sqrt(2)*rectSL/2)){
       alive = false;
       noLoop();
       TOD = millis() - startTime;
@@ -350,7 +337,7 @@ class Asteroid {
     }
   }
   //Actually makes the asteroids
-  void display() {
+  display() {
     fill(colora,colorb,colorc);
     beginShape();
     if(aType == 1){
@@ -362,14 +349,14 @@ class Asteroid {
     if(aType == 3){
       texture(ast3);
     }
-    float px1 = xpos  +  size*sqrt(2)*cos(astR);
-    float py1 = ypos  +  size*sqrt(2)*sin(astR);
-    float px2 = xpos  +  size*sqrt(2)*cos(astR+PI/2);
-    float py2 = ypos  +  size*sqrt(2)*sin(astR+PI/2);
-    float px3 = xpos  +  size*sqrt(2)*cos(astR+PI);
-    float py3 = ypos  +  size*sqrt(2)*sin(astR+PI);
-    float px4 = xpos  +  size*sqrt(2)*cos(astR+3*PI/2);
-    float py4 = ypos  +  size*sqrt(2)*sin(astR+3*PI/2);
+    var px1 = xpos  +  createCanvas*sqrt(2)*cos(astR);
+    var py1 = ypos  +  createCanvas*sqrt(2)*sin(astR);
+    var px2 = xpos  +  createCanvas*sqrt(2)*cos(astR+PI/2);
+    var py2 = ypos  +  createCanvas*sqrt(2)*sin(astR+PI/2);
+    var px3 = xpos  +  createCanvas*sqrt(2)*cos(astR+PI);
+    var py3 = ypos  +  createCanvas*sqrt(2)*sin(astR+PI);
+    var px4 = xpos  +  createCanvas*sqrt(2)*cos(astR+3*PI/2);
+    var py4 = ypos  +  createCanvas*sqrt(2)*sin(astR+3*PI/2);
     vertex(px1,py1, 0, 0);
     vertex(px2,py2, 600, 0);
     vertex(px3,py3, 600, 600);
@@ -379,9 +366,9 @@ class Asteroid {
 }
 
 //Calculates high score
-float Record(){
-  float r = scores[0];
-  for (int i = 1; i < scores.length; i++) {
+function Record(){
+  var r = scores[0];
+  for (var i = 1; i < scores.length; i++) {
     if (scores[i] > r) {
       r = scores[i];
     }
@@ -395,41 +382,30 @@ float Record(){
 
 //Amo Class
 class Amo {
-  float size;
-  float velAmo;
-  float aDir;
-  float colora;
-  float colorb;
-  float colorc;
-  float xpos;
-  float ypos;
-  float startx;
-  float starty;
-  float movement;
-  //Contructor
-  Amo(float i1, float i2, float i3, float i4, float i5, float i6, float i7, float i8) {
-    size = i1;
-    velAmo = i2;
-    aDir = i3;
-    colora = i4;
-    colorb = i5;
-    colorc = i6;
-    startx = i7;
-    starty = i8;
-    xpos = 0;
-    ypos = 0;
+  constructor( i1,  i2,  i3,  i4,  i5,  i6,  i7,  i8) {
+    this.size = i1;
+    this.velAmo = i2;
+    this.aDir = i3;
+    this.colora = i4;
+    this.colorb = i5;
+    this.colorc = i6;
+    this.startx = i7;
+    this.starty = i8;
+    this.xpos = 0;
+    this.ypos = 0;
+    this.movement = 0;
   }
   //Constantly moves in a direction
-  void update() {
+  update() {
     xpos = startx + movement * cos(aDir);
     ypos = starty + movement * sin(aDir);
     movement += velAmo;
     //Resets asteroid if it gets hit by amo
-    for (int i = 0; i<rocks.length; i++) {
-      if (sqrt(pow(rocks[i].xpos-this.xpos,2)+pow(rocks[i].ypos-this.ypos,2))<this.size+rocks[i].size){
+    for (var i = 0; i<rocks.length; i++) {
+      if (sqrt(pow(rocks[i].xpos-this.xpos,2)+pow(rocks[i].ypos-this.ypos,2))<this.createCanvas+rocks[i].createCanvas){
         numAstShot++;
         rocks[i].movement = 0;
-        int ran = floor(random(1,5));
+        var ran = floor(random(1,5));
         if(ran==1){
           rocks[i].startx = random(1,width-1);
           rocks[i].starty = 1;
@@ -447,7 +423,7 @@ class Amo {
           rocks[i].starty = random(1,height-1);
         }
         //Essentially deletes amo when it hits an asteroid
-        this.size = 0;
+        this.createCanvas = 0;
         this.velAmo = 0;
         this.aDir = 0;
         this.colora = 0;
@@ -460,8 +436,8 @@ class Amo {
       }
     }
   }
-  void display() {
+  display() {
     fill(colora,colorb,colorc);
-    ellipse(xpos,ypos,size,size);
+    ellipse(xpos,ypos,createCanvas,createCanvas);
   }
 }
