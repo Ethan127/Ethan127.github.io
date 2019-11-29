@@ -17,7 +17,7 @@ function preload() {
 }
 
 //Determines angle based on vector (x and y values) using inverse tangent
-function theA(x, y){
+function theAngle(x, y){
   var tAngle = 0;
   if (x>0 && y>0){
     tAngle = atan(abs(y)/abs(x));
@@ -138,7 +138,7 @@ function draw() {
   //Determines angle of rotation of spaceship (using inverse tangent)
   //If statements figure out what quadrant the mouse is in relative to the center
   //Function located below
-  angle = theA(mouseX-centerX, mouseY-centerY);
+  angle = theAngle(mouseX-centerX, mouseY-centerY);
   
   //Translates space ship around unless it's on an edge
   moveX = moveX + velX/mass;
@@ -195,8 +195,8 @@ function draw() {
   var minute = floor(seconds / 60);
   var second = floor(seconds % 60);
   var velocity = sqrt(velX*velX+velY*velY);
-  var rAngle = 360 - theA(mouseX-centerX, mouseY-centerY)*180/PI;
-  var vAngle = 360 - theA(velX, velY)*180/PI;
+  var rAngle = 360 - theAngle(mouseX-centerX, mouseY-centerY)*180/PI;
+  var vAngle = 360 - theAngle(velX, velY)*180/PI;
   
   var s1 = "Velocity: " + velocity + "m/s";
   var s2 = "Angle of velocity: " + vAngle + "\u00b0";
@@ -250,7 +250,7 @@ function draw() {
   fill(66, 200, 244);
   text(s6, 0, height-30, 150, 50);
   fill(0, 0, 0, 255);
-  text(highScore, 0, 0+60, 150, 50);
+  text(highScore, 0, 0+60, 200, 50);
   rectMode(CORNER); 
 }
 
