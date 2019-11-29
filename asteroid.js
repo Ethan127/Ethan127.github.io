@@ -235,20 +235,20 @@ function draw() {
   }
   rectMode(RADIUS);
   fill(0,255,100,gameTrans);
-  rect(width/2, height/2+50, 300, 125, 100);
+  rect(0, 0+50, 300, 125, 100);
   textSize(50);
   fill(0,0,0, 255);
-  text(game, width/2-143, height/2);
+  text(game, 0-143, height/2);
   textSize(25);
-  text(survival, width/2-250, height/2+100);
+  text(survival, 0-250, 0+100);
   textSize(18);
-  text(mess, width/2-145, height/2+150);
+  text(mess, 0-145, 0+150);
   rectMode(CENTER);
   textSize(25);
   fill(66, 200, 244);
-  text(s6, width/2, height-30, 150, 50);
+  text(s6, 0, height-30, 150, 50);
   fill(0, 0, 0, 255);
-  text(highScore, width/2, height/2+60, 150, 50);
+  text(highScore, 0, 0+60, 150, 50);
   rectMode(CORNER); 
 }
 
