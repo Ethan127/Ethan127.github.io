@@ -18,7 +18,7 @@ function preload() {
   music = loadSound('assets/Sounds/music.mp3');
   rocketSound = loadSound('assets/Sounds/rocket.mp3');
   death = loadSound('assets/Sounds/boom.mp3');
-  gun = loadSound('assets/Sounds/laser.mp3');
+  gun = loadSound('assets/Sounds/laser.wav');
 }
 
 //Determines angle based on vector (x and y values) using inverse tangent
