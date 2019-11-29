@@ -39,7 +39,7 @@ function partialSetup(){
   //Sets starting values for variables
   moveX = 0;
   moveY = 0;
-  centerX = -10;
+  centerX = -100;
   centerY = 1;
   X = 0;
   Y = 0;
