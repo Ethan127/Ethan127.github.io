@@ -4,6 +4,7 @@ var keyW, keyA, keyS, keyD, alive;
 var numAst, timesDied, numAmo, amoNum, Score, numAstShot;
 var rocks, bullets;
 var scores;
+var music, rocketSound, death;
 
 function preload() {
   ast1 = loadImage("assets/a1.png");
@@ -14,6 +15,9 @@ function preload() {
   rocket2 = loadImage("assets/rocket.png");
   backgroundI = loadImage("assets/Background.png");
   myFont = loadFont("/assets/montserrat/Montserrat-Bold.otf");
+  music = loadSound('assets/Sounds/music.mp3');
+  rocketSound = loadSound('assets/Sounds/rocket.mp3');
+  death = loadSound('assets/Sounds/boom.mp3');
 }
 
 //Determines angle based on vector (x and y values) using inverse tangent
@@ -93,6 +97,9 @@ function setup() {
   rectSL = 30;
   numAst = 15;
   numAmo = 10; //Highest number of bullets on screen at once
+
+  //Plays music
+  music.loop(1,0.5);
   
   //Partially setups the game
   partialSetup();
@@ -275,27 +282,35 @@ function draw() {
 function keyPressed() {
     if (key == 'a') {
       keyA = true;
+      rocketSound.play();
     } else if (key == 'd') {
       keyD = true;
+      rocketSound.play();
     }else if (key == 'w') {
       keyW = true;
+      rocketSound.play();
       rocket = rocket2;
     }else if (key == 's') {
       keyS = true;
+      rocketSound.play();
     }
 }
 function keyReleased() {
     if (key == 'a') {
       keyA = false;
+      rocketSound.stop();
       rocket = rocket1;
     } else if (key == 'd') {
       keyD = false;
+      rocketSound.stop();
       rocket = rocket1;
     }else if (key == 'w') {
       keyW = false;
+      rocketSound.stop();
       rocket = rocket1;
     }else if (key == 's') {
       keyS = false;
+      rocketSound.stop();
       rocket = rocket1;
     }
 }
@@ -347,6 +362,7 @@ class Asteroid {
       TOD = millis() - startTime;
       timesDied++;
       scores[timesDied] = Score;
+      death.play();
     }
   }
   //Actually makes the asteroids
