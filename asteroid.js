@@ -1,5 +1,3 @@
-/* @pjs preload="Images/Background.png, Images/a1.png, Images/a2.png, Images/a3.png, Images/rocketwithoutflame.png, Images/rocket.png"; */
-
 var moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, seconds, timeElapsed, startTime, TOD, record;
 let backgroundI, rocket, ast1, ast2, ast3, rocketImage, rocketImage2;
 var keyW, keyA, keyS, keyD, alive;
@@ -9,7 +7,6 @@ Amo bullets[];*/
 var scores;
 
 function preload() {
-  img = loadImage('assets/laDefense.jpg');
   backgroundI = loadImage("Images/Background.png");
   ast1 = loadImage("Images/a1.png");
   ast2 = loadImage("Images/a2.png");
@@ -17,9 +14,6 @@ function preload() {
   rocket = loadImage("Images/rocketwithoutflame.png");
   rocket1 = loadImage("Images/rocketwithoutflame.png");
   rocket2 = loadImage("Images/rocket.png");
-}
-function setup() {
-  image(img, 0, 0);
 }
 
 //Determines angle based on vector (x and y values) using inverse tangent
