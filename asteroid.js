@@ -46,7 +46,6 @@ function randPos(){
   if (sqrt(pow(x,2) + pow(y,2)) >= safetyRad){
     rockPos[0]=x;
     rockPos[1]=y;
-    break;
   } else {
     randPos();
   }
