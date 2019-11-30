@@ -1,0 +1,52 @@
+.large-header {
+   position: fixed;
+   width: 100%;
+   background: #111;
+   overflow: hidden;
+   background-size: cover;
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+}
+.text{
+    text-align: center; 
+    width: 100%;
+    position: absolute;
+}
+.demo .large-header {
+   background-image: url("https://images8.alphacoders.com/601/601973.jpg");
+   z-index: -100;
+}
+
+.main-title {
+   position: absolute;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   padding-top: 35px;
+   color: #F9F1E9;
+   text-align: center;
+}
+
+.demo .main-title {
+   text-transform: uppercase;
+   font-size: 2.2em;
+   letter-spacing: 0.1em;
+}
+
+.main-title .thin {
+   font-weight: 200;
+}
+
+@media only screen and (max-width: 768px) {
+   .demo .main-title{
+      font-size: 3em;
+   }
+   .text {
+    font-size: 1em;
+   }
+}
+
+.content{
+    position: relative;
+}
