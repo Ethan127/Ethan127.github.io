@@ -1,6 +1,6 @@
 var moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, AmoV, seconds, timeElapsed, startTime, TOD, record;
 var backgroundI, rocket, ast1, ast2, ast3, rocketImage, rocketImage2, myFont;
-var keyW, keyA, keyS, keyD, alive;
+var keyW, keyA, keyS, keyD, alive, cheats;
 var numAst, timesDied, numAmo, amoNum, Score, numAstShot;
 var rocks, bullets;
 var scores;
@@ -59,9 +59,8 @@ function partialSetup(){
   
   //An array of rocks
   rocks = new Array(numAst);
-  let index = 0;
   for (let x = 0; x < numAst; x++) {
-    rocks[index++] = new Asteroid(random(10,20), random(0,5), random(0,2*PI), random(255), random(255), random(255), random(-width/2,width/2), random(-height/2,height/2), floor(random(1,4)), random(-0.1,0.1));
+    rocks[x] = new Asteroid(random(10,20), random(0,5), random(0,2*PI), random(255), random(255), random(255), random(-width/2,width/2), random(-height/2,height/2), floor(random(1,4)), random(-0.1,0.1), x);
   }
 }
 
@@ -87,6 +86,7 @@ function setup() {
   rectSL = 30;
   numAst = 15;
   AmoV = 12;
+  cheats=false;
   numAmo = 10; //Highest number of bullets on screen at once
 
   //Plays music
@@ -326,7 +326,7 @@ function keyReleased() {
 //Asteroid Class
 class Asteroid {
   //Contructor
-  constructor( i1,  i2,  i3,  i4,  i5,  i6,  i7,  i8,  i9,  i10) {
+  constructor( i1,  i2,  i3,  i4,  i5,  i6,  i7,  i8,  i9,  i10, i11) {
     this.size = i1;
     this.velA = i2;
     this.aDir = i3;
@@ -334,6 +334,8 @@ class Asteroid {
     this.ypos = i8;
     this.aType = i9;
     this.astRot = i10;
+    this.index = i11;
+    this.indexPrevCol = -1;
     this.astR = 0;
     this.px1 = 0;
     this.py1 = 0;
@@ -358,7 +360,7 @@ class Asteroid {
       this.ypos = -this.ypos+this.velA * sin(this.aDir);
     }
     //If the rocket collides with an asteroid, you die
-    if (sqrt(pow((centerX - this.xpos),2)+pow((centerY - this.ypos),2))<=(this.size+sqrt(2)*rectSL/2)){
+    if (sqrt(pow((centerX - this.xpos),2)+pow((centerY - this.ypos),2))<=(this.size+sqrt(2)*rectSL/2) && !cheats){
       alive = false;
       noLoop();
       TOD = millis() - startTime;
@@ -370,7 +372,10 @@ class Asteroid {
   //Collision detector
   collision() {
     for(const other of rocks){
-      if(sqrt(pow((other.xpos - this.xpos),2)+pow((other.ypos - this.ypos),2))<=(this.size+other.size) && other!=this){
+      if(sqrt(pow((other.xpos - this.xpos),2)+pow((other.ypos - this.ypos),2))<=(this.size+other.size) && other!=this && other.index!=this.indexPrevCol){
+        this.indexPrevCol = other.index;
+        other.indexPrevCol = this.index;
+
         //From https://en.wikipedia.org/wiki/Elastic_collision
         let m1 = PI*this.size*this.size;
         let m2 = PI*other.size*other.size;
