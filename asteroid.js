@@ -1,6 +1,6 @@
 var moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, AmoV, seconds, timeElapsed, startTime, TOD, record;
 var backgroundI, rocket, ast1, ast2, ast3, rocketImage, rocketImage2, myFont;
-var keyW, keyA, keyS, keyD, alive, cheats;
+var keyW, keyA, keyS, keyD, alive, cheats, safetyRad;
 var numAst, timesDied, numAmo, amoNum, Score, numAstShot;
 var rocks, bullets;
 var scores;
@@ -38,8 +38,16 @@ function theAngle(x, y){
   }
   return tAngle;
 }
-function rotateArray(v, theta) {
-  return [v[0] * Math.cos(theta) - v[1] * Math.sin(theta), v[0] * Math.sin(theta) + v[1] * Math.cos(theta)];
+
+function randPos(tArray){
+  let x = random(-width/2,width/2);
+  let y = random(-height/2,height/2);
+  if (sqrt(pow(x,2) + pow(y,2)) >= safetyRad){
+    tArray[0]=x;
+    tArray[1]=y;
+  } else {
+    randPos();
+  }
 }
 
 //Partially setups the game
@@ -59,8 +67,10 @@ function partialSetup(){
   
   //An array of rocks
   rocks = new Array(numAst);
+  let rockPos=[0,0];
   for (let x = 0; x < numAst; x++) {
-    rocks[x] = new Asteroid(random(10,20), random(0,5), random(0,2*PI), random(255), random(255), random(255), random(-width/2,width/2), random(-height/2,height/2), floor(random(1,4)), random(-0.1,0.1), x);
+    randPos(rockPos);
+    rocks[x] = new Asteroid(random(10,20), random(0,5), random(0,2*PI), random(255), random(255), random(255), rockPos[0], rockPos[1], floor(random(1,4)), random(-0.1,0.1), x);
   }
 }
 
@@ -84,9 +94,10 @@ function setup() {
   //Modifiable
   mass = 10;
   rectSL = 30;
-  numAst = 15;
+  numAst = 45;
   AmoV = 12;
   cheats=false;
+  safetyRad=50;
   numAmo = 10; //Highest number of bullets on screen at once
 
   //Plays music
@@ -150,7 +161,7 @@ function draw() {
   seconds = timeElapsed / 1000;
   
   //Score keeper
-  Score = (round(timeElapsed) + 1000*numAstShot)/10;
+  Score = round((timeElapsed + 1000*numAstShot)/10);
   
   //Updates location of rocks and amo
   for (const rock of rocks) {
