@@ -155,8 +155,8 @@ function draw() {
   //Updates location of rocks and amo
   for (const rock of rocks) {
     rock.update();
-    rock.display();
     rock.collision();
+    rock.display();
   }
   for (const bullet of bullets) {
     bullet.update();
@@ -330,18 +330,11 @@ class Asteroid {
     this.size = i1;
     this.velA = i2;
     this.aDir = i3;
-    this.colora = i4;
-    this.colorb = i5;
-    this.colorc = i6;
-    this.startx = i7;
-    this.starty = i8;
+    this.xpos = i7;
+    this.ypos = i8;
     this.aType = i9;
     this.astRot = i10;
-    this.xpos = 0;
-    this.ypos = 0;
     this.astR = 0;
-    this.movement = 0;
-    this.ran=0;
     this.px1 = 0;
     this.py1 = 0;
     this.px2 = 0;
@@ -356,15 +349,13 @@ class Asteroid {
   }
   //Constantly moves in a direction
   update() {
-    this.xpos = this.startx + this.movement * cos(this.aDir);
-    this.ypos = this.starty + this.movement * sin(this.aDir);
+    this.xpos += this.velA * cos(this.aDir);
+    this.ypos += this.velA * sin(this.aDir);
     this.astR = this.astR + this.astRot;
-    this.movement += this.velA;
     //Resets position if it goes to an edge
     if (this.xpos <= -width/2 || this.xpos >= width/2 || this.ypos <= -height/2 || this.ypos >= height/2){
-      this.movement = 0;
-      this.startx = -this.startx;
-      this.starty = -this.starty;
+      this.xpos = -this.xpos+this.velA * cos(this.aDir);
+      this.ypos = -this.ypos+this.velA * sin(this.aDir);
     }
     //If the rocket collides with an asteroid, you die
     if (sqrt(pow((centerX - this.xpos),2)+pow((centerY - this.ypos),2))<=(this.size+sqrt(2)*rectSL/2)){
@@ -379,21 +370,23 @@ class Asteroid {
   //Collision detector
   collision() {
     for(const other of rocks){
-      if(sqrt(pow((other.xpos - this.xpos),2)+pow((other.ypos - this.ypos),2))<=(this.size+other.size)){
+      if(sqrt(pow((other.xpos - this.xpos),2)+pow((other.ypos - this.ypos),2))<=(this.size+other.size) && other!=this){
+        //From https://en.wikipedia.org/wiki/Elastic_collision
         let m1 = PI*this.size*this.size;
         let m2 = PI*other.size*other.size;
 
-        var theta = -Math.atan2(other.ypos - this.ypos, other.xpos - this.xpos);
-        var v1 = rotateArray(this.v, theta);
-        var v2 = rotateArray(other.v, theta);
+        let veldiff = [this.v[0]-other.v[0],this.v[1]-other.v[1]];
+        let posdiff = [this.xpos-other.xpos,this.ypos-other.ypos];
 
-        var u1 = rotateArray([v1[0] * (m1 - m2)/(m1 + m2) + v2[0] * 2 * m2/(m1 + m2), v1[1]], -theta);
-        var u2 = rotateArray([v2[0] * (m2 - m1)/(m1 + m2) + v1[0] * 2 * m1/(m1 + m2), v2[1]], -theta);
-        
+        let factor = (veldiff[0]*posdiff[0] + veldiff[1]*posdiff[1]) / (posdiff[0]*posdiff[0] + posdiff[1]*posdiff[1]);
+        let factor1 = 2*m2/(m1+m2)*factor;
+        let factor2 = 2*m1/(m1+m2)*factor;
+
+        let u1 = [this.v[0]-factor1*posdiff[0],this.v[1]-factor1*posdiff[1]];
+        let u2 = [other.v[0]+factor2*posdiff[0],other.v[1]+factor2*posdiff[1]];
+
         this.aDir = theAngle(u1[0],u1[1]);
         this.velA = sqrt(pow(u1[0],2)+pow(u1[1],2));
-        console.log(this.velA);
-        console.log(this.aDir);
 
         other.aDir = theAngle(u2[0],u2[1]);
         other.velA = sqrt(pow(u2[0],2)+pow(u2[1],2));
@@ -402,7 +395,6 @@ class Asteroid {
   }
   //Actually makes the asteroids
   display() {
-    fill(this.colora,this.colorb,this.olorc);
     beginShape();
     if(this.aType == 1){
       texture(ast1);
@@ -439,40 +431,35 @@ class Amo {
     this.colora = i4;
     this.colorb = i5;
     this.colorc = i6;
-    this.startx = i7;
-    this.starty = i8;
-    this.xpos = 0;
-    this.ypos = 0;
-    this.movement = 0;
+    this.xpos = i7;
+    this.ypos = i8;
   }
   //Constantly moves in a direction
   update() {
-    this.xpos = this.startx + this.movement * cos(this.aDir);
-    this.ypos = this.starty + this.movement * sin(this.aDir);
-    this.movement += this.velAmo;
+    this.xpos += this.velAmo * cos(this.aDir);
+    this.ypos += this.velAmo * sin(this.aDir);
     //Resets asteroid if it gets hit by amo
     for (let i = 0; i<rocks.length; i++) {
       if (sqrt(pow(rocks[i].xpos-this.xpos,2)+pow(rocks[i].ypos-this.ypos,2))<this.size+rocks[i].size){
         numAstShot++;
-        rocks[i].movement = 0;
         rocks[i].xpos = 0;
         rocks[i].ypos = 0;
-        this.ran = floor(random(1,5));
-        if(this.ran==1){
-          rocks[i].startx = random(1-width/2,width/2-1);
-          rocks[i].starty = 1-height/2;
+        let ran = floor(random(1,5));
+        if(ran==1){
+          rocks[i].xpos = random(1-width/2,width/2-1);
+          rocks[i].ypos = 1-height/2;
         }
-        if(this.ran==2){
-          rocks[i].startx = random(1-width/2,width/2-1);
-          rocks[i].starty = height-1;
+        if(ran==2){
+          rocks[i].xpos = random(1-width/2,width/2-1);
+          rocks[i].ypos = height/2-1;
         }
-        if(this.ran==3){
-          rocks[i].startx = 1-width/2;
-          rocks[i].starty = random(1-height/2,height/2-1);
+        if(ran==3){
+          rocks[i].xpos = 1-width/2;
+          rocks[i].ypos = random(1-height/2,height/2-1);
         }
-        if(this.ran==4){
-          rocks[i].startx = width-1;
-          rocks[i].starty = random(1-height/2,height/2-1);
+        if(ran==4){
+          rocks[i].xpos = width/2-1;
+          rocks[i].ypos = random(1-height/2,height/2-1);
         }
         //Essentially deletes amo when it hits an asteroid
         this.size = 0;
@@ -481,8 +468,6 @@ class Amo {
         this.colora = 0;
         this.colorb = 0;
         this.colorc = 0;
-        this.startx = 0;
-        this.starty = 0;
         this.xpos = 0;
         this.ypos = 0;
       }
