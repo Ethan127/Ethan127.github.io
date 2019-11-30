@@ -97,7 +97,7 @@ function setup() {
   numAst = 45;
   AmoV = 12;
   cheats=false;
-  safetyRad=50;
+  safetyRad=500;
   numAmo = 10; //Highest number of bullets on screen at once
 
   //Plays music
