@@ -38,6 +38,9 @@ function theAngle(x, y){
   }
   return tAngle;
 }
+function rotateArray(v, theta) {
+  return [v[0] * Math.cos(theta) - v[1] * Math.sin(theta), v[0] * Math.sin(theta) + v[1] * Math.cos(theta)];
+}
 
 //Partially setups the game
 function partialSetup(){
@@ -82,7 +85,7 @@ function setup() {
   //Modifiable
   mass = 10;
   rectSL = 30;
-  numAst = 5;
+  numAst = 15;
   AmoV = 12;
   numAmo = 10; //Highest number of bullets on screen at once
 
@@ -153,6 +156,7 @@ function draw() {
   for (const rock of rocks) {
     rock.update();
     rock.display();
+    rock.collision();
   }
   for (const bullet of bullets) {
     bullet.update();
@@ -347,6 +351,9 @@ class Asteroid {
     this.px4 = 0;
     this.py4 = 0;
   }
+  get v() {
+    return [this.velA*cos(this.aDir), this.velA*sin(this.aDir)];
+  }
   //Constantly moves in a direction
   update() {
     this.xpos = this.startx + this.movement * cos(this.aDir);
@@ -367,6 +374,30 @@ class Asteroid {
       timesDied++;
       scores[timesDied] = Score;
       death.play();
+    }
+  }
+  //Collision detector
+  collision() {
+    for(const other of rocks){
+      if(sqrt(pow((other.xpos - this.xpos),2)+pow((other.ypos - this.ypos),2))<=(this.size+other.size)){
+        let m1 = PI*this.size*this.size;
+        let m2 = PI*other.size*other.size;
+
+        var theta = -Math.atan2(other.ypos - this.ypos, other.xpos - this.xpos);
+        var v1 = rotateArray(this.v, theta);
+        var v2 = rotateArray(other.v, theta);
+
+        var u1 = rotateArray([v1[0] * (m1 - m2)/(m1 + m2) + v2[0] * 2 * m2/(m1 + m2), v1[1]], -theta);
+        var u2 = rotateArray([v2[0] * (m2 - m1)/(m1 + m2) + v1[0] * 2 * m1/(m1 + m2), v2[1]], -theta);
+        
+        this.aDir = theAngle(u1[0],u1[1]);
+        this.velA = sqrt(pow(u1[0],2)+pow(u1[1],2));
+        console.log(this.velA);
+        console.log(this.aDir);
+
+        other.aDir = theAngle(u2[0],u2[1]);
+        other.velA = sqrt(pow(u2[0],2)+pow(u2[1],2));
+      }
     }
   }
   //Actually makes the asteroids
