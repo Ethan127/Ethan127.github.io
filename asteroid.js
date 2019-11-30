@@ -276,9 +276,10 @@ function draw() {
     mess = "";
     gameTrans = 0;
   }
+  let roundness=35;
   rectMode(RADIUS);
   fill(0,255,100,gameTrans);
-  rect(0, 50, 300, 125, 15);
+  rect(0, 50, 300, 125, roundness,roundness,roundness,roundness);
   textSize(50);
   fill(0,0,0, 255);
   text(game, 0-143, 0);
