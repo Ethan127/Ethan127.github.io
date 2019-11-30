@@ -1,7 +1,7 @@
 var moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, AmoV, seconds, timeElapsed, startTime, TOD, record;
 var backgroundI, rocket, ast1, ast2, ast3, rocketImage, rocketImage2, myFont;
 var keyW, keyA, keyS, keyD, alive, cheats, safetyRad;
-var numAst, timesDied, numAmo, amoNum, Score, numAstShot, rockPos;
+var numAst, timesDied, numAmo, amoNum, Score, numAstShot, rockPos, roundness;
 var rocks, bullets;
 var scores;
 var music, rocketSound, death, gun;
@@ -276,7 +276,7 @@ function draw() {
     mess = "";
     gameTrans = 0;
   }
-  let roundness=35;
+  roundness=35;
   rectMode(RADIUS);
   fill(0,255,100,gameTrans);
   rect(0, 50, 300, 125, roundness,roundness,roundness,roundness);
