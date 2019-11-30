@@ -1,7 +1,7 @@
 var moveX, centerX, X, velX, angle, aimR, mass, rectSL, moveY, centerY, Y, velY, AmoV, seconds, timeElapsed, startTime, TOD, record;
 var backgroundI, rocket, ast1, ast2, ast3, rocketImage, rocketImage2, myFont;
 var keyW, keyA, keyS, keyD, alive, cheats, safetyRad;
-var numAst, timesDied, numAmo, amoNum, Score, numAstShot;
+var numAst, timesDied, numAmo, amoNum, Score, numAstShot, rockPos;
 var rocks, bullets;
 var scores;
 var music, rocketSound, death, gun;
@@ -67,7 +67,7 @@ function partialSetup(){
   
   //An array of rocks
   rocks = new Array(numAst);
-  let rockPos=[0,0];
+  rockPos=[0,0];
   for (let x = 0; x < numAst; x++) {
     randPos(rockPos);
     rocks[x] = new Asteroid(random(10,20), random(0,5), random(0,2*PI), random(255), random(255), random(255), rockPos[0], rockPos[1], floor(random(1,4)), random(-0.1,0.1), x);
