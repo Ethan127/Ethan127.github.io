@@ -154,8 +154,8 @@ function draw() {
   
   //Updates location of rocks and amo
   for (const rock of rocks) {
-    rock.update();
     rock.collision();
+    rock.update();
     rock.display();
   }
   for (const bullet of bullets) {
