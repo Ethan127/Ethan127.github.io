@@ -39,12 +39,14 @@ function theAngle(x, y){
   return tAngle;
 }
 
-function randPos(tArray){
+rockPos=[0,0];
+function randPos(){
   let x = random(-width/2,width/2);
   let y = random(-height/2,height/2);
   if (sqrt(pow(x,2) + pow(y,2)) >= safetyRad){
-    tArray[0]=x;
-    tArray[1]=y;
+    rockPos[0]=x;
+    rockPos[1]=y;
+    break;
   } else {
     randPos();
   }
@@ -67,9 +69,8 @@ function partialSetup(){
   
   //An array of rocks
   rocks = new Array(numAst);
-  rockPos=[0,0];
   for (let x = 0; x < numAst; x++) {
-    randPos(rockPos);
+    randPos();
     rocks[x] = new Asteroid(random(10,20), random(0,5), random(0,2*PI), random(255), random(255), random(255), rockPos[0], rockPos[1], floor(random(1,4)), random(-0.1,0.1), x);
   }
 }
