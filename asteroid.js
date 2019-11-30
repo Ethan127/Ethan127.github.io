@@ -277,9 +277,9 @@ function draw() {
     gameTrans = 0;
   }
   roundness=35;
-  rectMode(RADIUS);
+  rectMode(CENTER);
   fill(0,255,100,gameTrans);
-  rect(0, 50, 300, 125, roundness,roundness,roundness,roundness);
+  rect(0, 0, 300, 125, roundness,roundness,roundness,roundness);
   textSize(50);
   fill(0,0,0, 255);
   text(game, 0-143, 0);
